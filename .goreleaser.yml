@@ -3,10 +3,9 @@
 builds:
 - env:
   - CGO_ENABLED=0
-  - VERSION_PKG=github.com/sunny0826/kust-check/version
 #  - GO_FLAGS=-ldflags="-X ${VERSION_PKG}.Ver=$(BLADE_VERSION) -X '${VERSION_PKG}.Env=`uname -mv`' -X '${VERSION_PKG}.BuildTime=`date`'"
 #  ldflags: -s -X github.com/sunny0826/kust-check/cmd.Ver={{.Version}} -X github.com/sunny0826/kust-check/cmd.GitCommit={{.Commit}} -X github.com/sunny0826/kust-check/cmd.BuildTime={{.Date}}
-  ldflags: -s -X $VERSION_PKG.Ver={{.Version}} -X $VERSION_PKG.GitCommit={{.Commit} -X $VERSION_PKG.BuildTime={{.Date}}
+  ldflags: -s -X github.com/sunny0826/kust-check/version.Ver={{.Version}} -X github.com/sunny0826/kust-check/version.GitCommit={{.Commit} -X github.com/sunny0826/kust-check/version.BuildTime={{.Date}}
   goos:
     - linux
     - darwin
