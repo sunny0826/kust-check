@@ -1,0 +1,30 @@
+# This is an example goreleaser.yaml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+builds:
+- env:
+  - CGO_ENABLED=0
+  ldflags: -s -X github.com/sunny0826/kust-check/cmd.Ver={{.Version}} -X github.com/sunny0826/kust-check/cmd.GitCommit={{.Commit}} -X github.com/sunny0826/kust-check/cmd.BuildTime={{.Date}}
+  goos:
+    - linux
+    - darwin
+    - windows
+archives:
+- replacements:
+    darwin: Darwin
+    linux: Linux
+    windows: Windows
+    386: i386
+    amd64: x86_64
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-rc"
+changelog:
+  sort: asc
+release:
+  github:
+    owner: sunny0826
+    name: kust-check
+
+  name_template: '{{.ProjectName}}-v{{.Version}}'
+
