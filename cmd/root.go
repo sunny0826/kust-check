@@ -21,7 +21,7 @@ func NewCli() *Cli {
     },
   }
   cli.rootCmd.SetOutput(os.Stdout)
-  cli.setFlags()
+  //cli.setFlags()
   return cli
 }
 
