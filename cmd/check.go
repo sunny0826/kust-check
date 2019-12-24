@@ -19,6 +19,7 @@ const localPath = "https://github.com/sunny0826/kustomize.git"
 const upstreamPath = "https://github.com/kubernetes-sigs/kustomize.git"
 const dirName = "kustomize"
 const logFileName = "updateLog"
+
 var dingtoken = os.Getenv("DING_TOKEN")
 
 func (cc *CheckCommand) Init() {
@@ -104,12 +105,8 @@ func (cc *CheckCommand) commandFetchUpstream(gitCmd string) *exec.Cmd {
 func (cc *CheckCommand) commandDiffTree(gitCmd string) *exec.Cmd {
 	cc.command.Println("diff tree")
 	return exec.Command(
-		gitCmd,
-		"diff",
-		"--stat",
-		"master",
-		"upstream/master",
-		"docs",
+		"bash", "-c",
+		fmt.Sprintf("%s diff --name-only master upstream/master | egrep '^examples|^docs'", gitCmd),
 	)
 }
 
@@ -156,9 +153,6 @@ func writeFile(fileName string, content string) {
 	}
 	defer f.Close()
 	f.WriteString(content)
-	//for i := 0; i < 10; i++ {
-		//f.Write([]byte("Just a test!\n"))
-	//}
 }
 
 func checkExample() string {
