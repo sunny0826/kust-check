@@ -58,7 +58,8 @@ func (cc *CheckCommand) runCheck(command *cobra.Command, args []string) error {
 	diffCmd := cc.commandDiffTree(git)
 	diffCmd.Dir = dirName
 	diffOut, err := diffCmd.Output()
-	update_time := time.Now().Format("2006-01-02 15:04:05")
+	loc, _:= time.LoadLocation("Asia/Shanghai")
+	update_time := time.Now().In(loc).Format("2006-01-02 15:04:05")
 	if string(diffOut) != "" {
 		err := cc.sendDingtalk(string(diffOut))
 		if err != nil {
