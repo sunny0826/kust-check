@@ -65,9 +65,9 @@ func (cc *CheckCommand) runCheck(command *cobra.Command, args []string) error {
 		if err != nil {
 			return err
 		}
+		content := fmt.Sprintf("%s\n%s", update_time, string(diffOut))
+		writeFile(logFileName, content)
 	}
-	content := fmt.Sprintf("%s\n%s", update_time, string(diffOut))
-	writeFile(logFileName, content)
 	return nil
 }
 
